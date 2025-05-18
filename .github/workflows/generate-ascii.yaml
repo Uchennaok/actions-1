@@ -1,0 +1,26 @@
+name: My First Workflow
+
+on: push
+
+jobs:
+    first_job:
+        runs-on: ubuntu-latest
+        steps:
+        - name: checkout repo
+          uses: actions/checkout@v4
+
+        - name: Install Cowsay Program
+          run: sudo apt-get install cowsay -y
+
+        - name: GENERATE ASCII Artwork
+          run: cowsay -f dragon "Run for cover, I am a DRAGON....RAWR" >> dragon.txt
+
+        - name: List and read files
+          run: |
+            echo "My first Github Actions Job"
+            ls -ltra
+            cat README.md
+
+
+        - name: Read file
+          run: cat README.md
