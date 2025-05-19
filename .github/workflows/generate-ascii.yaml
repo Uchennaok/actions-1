@@ -1,16 +1,29 @@
 name: env-variable
 
 on: push
+env:
+    ALLJOBSPASSWORD: puppy123
 
 jobs:
-  first_job:
+  password_job:
     runs-on: ubuntu-latest
     env: 
-        CHECKNAME: name_is  # Use your environment name here
+        DOCKERPASSWORD: password101
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Show environment variable
         run: |
-          echo "Environment variable value: ${{env.CHECKNAME}}"
+          echo "this job specific password is: ${{env.DOCKERPASSWORD}}"
+          echo "the global password is: ${{env.ALLJOBSPASSWORD}}"
+
+
+  use_job:
+    needs: password_job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show environment variable
+        run: |
+          echo "the password is: ${{env.ALLJOBSPASSWORD}}"
+          echo "I do not have access to DOCKERPASSWORD , it is not global"
