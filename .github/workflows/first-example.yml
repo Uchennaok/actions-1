@@ -21,8 +21,8 @@ jobs:
         needs: build_job_1
         runs-on: ubuntu-latest
         steps:
-        - name: sleep for 10 seconds
-          uses: sleep 10
+        - name: sleep for 2 seconds
+          run: sleep 2
 
         - name: Test File Exists
           run:  grep -i "dragon" dragon.txt
