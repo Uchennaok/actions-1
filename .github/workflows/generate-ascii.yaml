@@ -7,6 +7,7 @@ env:
 jobs:
   password_job:
     runs-on: ubuntu-latest
+    environment: name_is
     env: 
         DOCKERPASSWORD: password101
     steps:
@@ -17,6 +18,7 @@ jobs:
         run: |
           echo "this job specific password is: ${{env.DOCKERPASSWORD}}"
           echo "the global password is: ${{env.ALLJOBSPASSWORD}}"
+          echo "Environment variable MY_NAME_IS is: ${{ vars.MY_NAME_IS }}"
 
 
   use_job:
