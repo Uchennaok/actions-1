@@ -1,39 +1,24 @@
-name: env-variable
+name: Matrix Configuration
 
-on: 
-    workflow_dispatch
-    # schedule:
-    #   - cron: "*/1 * * * *"
-env:
-    ALLJOBSPASSWORD: puppy123
+on:
+  push:
+  workflow_dispatch:
 
 jobs:
-  password_job:
-    runs-on: ubuntu-latest
-    environment: name_is
-    env: 
-        DOCKERPASSWORD: password101
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Show environment variable
-        run: |
-          echo "this job specific password is: ${{env.DOCKERPASSWORD}}"
-          echo "the global password is: ${{env.ALLJOBSPASSWORD}}"
-          echo "Environment variable MY_NAME_IS is: ${{ vars.MY_NAME_IS }}"
-
-
-  use_job:
-    needs: password_job
-    concurrency:
-        group: production-deployment
-        cancel-in-progress: true
+  deploy-on-ubuntu:
     runs-on: ubuntu-latest
     steps:
-      - name: Show environment variable
-        timeout-minutes: 1
-        run: |
-          echo "the password is: ${{env.ALLJOBSPASSWORD}}"
-          echo "I do not have access to DOCKERPASSWORD , it is not global"
-          sleep 6000s
+      - name: Echo Docker Details
+        run: docker info     # docker is preinstalled in github ubuntu by default
+
+      - name: Run Images
+        run: docker run hello-world
+
+  deploy-on-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Echo Docker Details
+        run: docker info
+
+      - name: Run Images
+        run: docker run hello-world
