@@ -32,6 +32,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Show environment variable
+        timeout-minutes: 1
         run: |
           echo "the password is: ${{env.ALLJOBSPASSWORD}}"
           echo "I do not have access to DOCKERPASSWORD , it is not global"
+          sleep 6000s
