@@ -1,0 +1,31 @@
+name: exploring worklow filters and activities
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - '!feature/*'    # this w
+    # branches-ignore:
+    #   - feature/*   # Ignores branches like `feature/login`, but not `feature/login/v2`
+    #   - test/**     # Ignores both test/login, or test/login/v2 or test/login/meow
+
+jobs:
+  deploy-on-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo Docker Details
+        run: docker info  # docker is preinstalled in github ubuntu by default
+
+      - name: Run Images
+        run: docker run hello-world
+
+  deploy-on-windows:
+    if: github.ref == 'refs/heads/main'
+    runs-on: windows-latest
+    steps:
+      - name: Echo Docker Details
+        run: docker info
+
+      - name: Run Images
+        run: docker run hello-world
