@@ -19,5 +19,5 @@ jobs:
       - name: Display file contents
         run: cat first_echo.txt
       
-      - name: AWS CLI check
-        run: aws sts get-caller-identity
+      - name: create folder
+        run: mkdir uch-folder
