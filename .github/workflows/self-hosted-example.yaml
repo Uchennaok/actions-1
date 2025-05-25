@@ -1,0 +1,23 @@
+name: AWS Self-Hosted Runner Test
+on: [push]
+
+jobs:
+  build:
+    runs-on: [self-hosted, Linux, X64, aws]
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Create first_echo.txt with multi-line content
+        run: |
+          cat > first_echo.txt << 'EOF'
+          This file was created during workflow execution
+          Running on: $(uname -a)
+          Workflow triggered by: ${{ github.event_name }}
+          Repository: ${{ github.repository }}
+          EOF
+          
+      - name: Display file contents
+        run: cat first_echo.txt
+      
+      - name: AWS CLI check
+        run: aws sts get-caller-identity
