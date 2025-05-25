@@ -1,4 +1,4 @@
-name: AWS Self-Hosted Runner Test
+name: AWS_Self-Hosted Runner Test
 on: [push]
 
 jobs:
