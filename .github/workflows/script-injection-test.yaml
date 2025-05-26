@@ -1,6 +1,8 @@
 name: Label Issues (Script Injection)
-on: push
-
+on:
+  issues:
+    types:
+      - opened
 jobs:
   assign-label:
     runs-on: ubuntu-latest
