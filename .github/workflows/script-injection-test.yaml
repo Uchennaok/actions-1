@@ -1,9 +1,5 @@
 name: Label Issues (Script Injection)
-
-on:
-  issues:
-    types:
-      - opened
+on: push
 
 jobs:
   assign-label:
